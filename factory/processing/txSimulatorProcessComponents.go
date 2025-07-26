@@ -12,6 +12,7 @@ import (
 	"github.com/multiversx/mx-chain-go/process/block/preprocess"
 	"github.com/multiversx/mx-chain-go/process/coordinator"
 	"github.com/multiversx/mx-chain-go/process/factory/shard"
+	disabled2 "github.com/multiversx/mx-chain-go/process/guardian/disabled"
 	"github.com/multiversx/mx-chain-go/process/smartContract"
 	"github.com/multiversx/mx-chain-go/process/smartContract/scrCommon"
 	"github.com/multiversx/mx-chain-go/process/transaction"
@@ -216,7 +217,7 @@ func (pcf *processComponentsFactory) createArgsTxSimulatorProcessorForMeta(
 		EconomicsFee:        pcf.coreData.EconomicsData(),
 		EnableEpochsHandler: pcf.coreData.EnableEpochsHandler(),
 		TxVersionChecker:    pcf.coreData.TxVersionChecker(),
-		GuardianChecker:     pcf.bootstrapComponents.GuardedAccountHandler(),
+		GuardianChecker:     disabled2.NewDisabledGuardedAccountHandler(),
 	}
 
 	txProcessor, err := transaction.NewMetaTxProcessor(argsTxProcessor)
